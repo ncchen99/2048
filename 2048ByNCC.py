@@ -85,7 +85,7 @@ class block(pg.sprite.Sprite):  # 每個Block的精靈類別
                     if newItemTable[i][j] != 0:
                         newItemTable[i][j] -= 0.25
                         wah = int(newItemTable[i][j]/0.25 + 1)
-                        self.rect.topleft = ( 
+                        self.rect.topleft = (
                             10+64*j+8*j+(32-8*(4-wah)), 10+64*i+8*i+(32-8*(4-wah)))
                         # 先移回來 10+64*j+8*j, 10+64*i+8*i
                         self.image = imgTable[table[i][j]][5-wah]
@@ -170,15 +170,16 @@ def init():
 # 3,0 3,1 3,2 3,3
 
 
-def showGameOver():
+def showGameOver(score):
     # 加畫字
     print("GameOver!")
     while True:
         background2 = Background(os.path.join('2048ByNCC', 'background.png'), [
             0, 0])  # 指定background2物件
         text = font.render("哈哈，你輸惹，偶是念誠", True, (255, 255, 255))
-        text2 = font.render("按[ENTER]重玩、[ESC]關掉", True, (255, 255, 255))
-
+        text2 = font.render("恭喜尼總共獲得 "+str(score)+" 分", True, (255, 255, 255))
+        text3 = font.render("按[ENTER]重玩、[ESC]關掉", True, (255, 255, 255))
+        print(score)
         for event in pg.event.get():
             if event.type == pg.QUIT:  # 關閉程式的判斷
                 return  # 關閉程式的程式碼
@@ -193,6 +194,7 @@ def showGameOver():
         screen.blit(background2.image, background2.rect)
         screen.blit(text, (20, 20))
         screen.blit(text2, (20, 80))
+        screen.blit(text3, (20, 140))
         pg.display.update()
         main_clock.tick(FPS)
     # os.execl(sys.executable, sys.executable, *sys.argv)
@@ -509,14 +511,19 @@ def main():
                     spriteTable[i][j].update(
                         i, j, direction, finishAnimation, finishMoveAnimation)
             finishMoveAnimation = False
+            score = 0
+            for i in range(4):  # y
+                for j in range(4):  # x
+                    spriteTable[i][j].update(
+                        i, j, direction, finishAnimation, finishMoveAnimation)
+                    score += table[i][j]
             if noMoreStep(table):
                 for i in range(4):  # y
-                    for j in range(4):  # x\
+                    for j in range(4):  # x
                         table[i][j] = 0
                         spriteTable[i][j].update(i, j, direction, True, True)
-                # Background.update(os.path.join('2048ByNCC', 'background.png')) #指定background物件
                 sleep(2)
-                showGameOver()
+                showGameOver(score)
                 return
         else:
             keys = pg.key.get_pressed()
