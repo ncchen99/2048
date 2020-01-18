@@ -1,4 +1,4 @@
-# 2048 By Pygame 
+# Pygame 2048 
 有動畫ㄉ喔😀
 
 要記得先安裝Pygameㄛ🧡
