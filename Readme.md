@@ -3,6 +3,10 @@
 
 要記得先安裝Pygameㄛ🧡
 
+```
+pip install pygame
+```
+
 ![](https://i.imgur.com/9GtElIm.png)
 
 ![](https://i.imgur.com/Tfenb0L.png)
