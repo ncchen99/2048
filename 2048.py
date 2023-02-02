@@ -9,7 +9,7 @@ from pygame.locals import Color, QUIT, MOUSEBUTTONDOWN, USEREVENT, USEREVENT
 from pygame import *
 from time import sleep
 
-# aaas
+# aaasssss
 # 使用變數先指定參數
 WINDOW_WIDTH = 300  # 遊戲畫面寬和高
 WINDOW_HEIGHT = 300
